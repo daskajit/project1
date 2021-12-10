@@ -21,6 +21,9 @@ def index() :
                 dict_req = dict(request.form)
                 response = prediction.form_response(dict_req)
                 return render_template("index.html", response = response)
+            elif request.json :
+                response = prediction.api_response(request.json)
+                return jsonify(response)
         
         except Exception as e:
             print(e)
@@ -33,3 +36,4 @@ def index() :
 
 if __name__ == "__main__" :
     app.run(host='0.0.0.0', port=5000, debug=True)
+
